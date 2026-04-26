@@ -45,7 +45,7 @@ public class PaymentGatewayService {
         ? request.cardNumber().substring(request.cardNumber().length() - CARD_LAST_DIGITS)
         : "N/A";
 
-    LOG.info("Processing payment. paymentId={} lastFour={} currency={} amount={}",
+    LOG.info("Processing payment request. paymentId={} lastFour={} currency={} amount={}",
         paymentId, lastFour, request.currency(), request.amount());
 
     PaymentStatus authorizedStatus;
@@ -53,7 +53,7 @@ public class PaymentGatewayService {
       paymentRequestValidator.validate(request);
       authorizedStatus = acquiringBank.processPayment(request);
     } catch (PaymentValidationException | BankException e) {
-      LOG.warn("Payment rejected. paymentId={} lastFour={} reason={}",
+      LOG.warn("Payment request rejected. paymentId={} lastFour={} reason={}",
           paymentId, lastFour, e.getMessage());
       throw e;
     } catch (Exception e) {
@@ -65,7 +65,7 @@ public class PaymentGatewayService {
     Payment payment = buildPayment(request, paymentId, lastFour, authorizedStatus);
     paymentsRepository.add(payment);
 
-    LOG.info("Payment processed. id={} status={} amount={} currency={} lastFour={}",
+    LOG.info("Payment request processed. id={} status={} amount={} currency={} lastFour={}",
         payment.id(), payment.status(), payment.amount(), payment.currency(), payment.cardNumberLastFour());
 
     return payment;
