@@ -60,7 +60,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"card_number\": \"2222405343248112\",\n  \"expiry_month\": 4,\n  \"expiry_year\": 2030,\n  \"currency\": \"GBP\",\n  \"amount\": 100,\n  \"cvv\": \"123\"\n}"
+              "raw": "{\n  \"card_number\": \"2222405343248158\",\n  \"expiry_month\": 4,\n  \"expiry_year\": 2030,\n  \"currency\": \"GBP\",\n  \"amount\": 100,\n  \"cvv\": \"123\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/api/v1/payments",

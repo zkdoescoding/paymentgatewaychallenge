@@ -75,7 +75,7 @@ class PaymentGatewayServiceTest {
 
   @Test
   void whenBankDeclinesPayment_thenDeclinedPaymentIsStoredAndReturned() {
-    PaymentRequest request = new PaymentRequest("2222405343248112", 4, 2099, "GBP", 50L, "456");
+    PaymentRequest request = new PaymentRequest("2222405343248158", 4, 2099, "GBP", 50L, "456");
     when(bankClient.processPayment(request)).thenReturn(PaymentStatus.DECLINED);
 
     Payment result = service.processPayment(request);
