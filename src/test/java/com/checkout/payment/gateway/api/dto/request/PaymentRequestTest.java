@@ -13,19 +13,19 @@ class PaymentRequestTest {
   @ParameterizedTest
   @ValueSource(strings = {"usd", "gbp", "eur", "Usd", "GbP"})
   void whenCurrencyIsAnyCase_thenItIsNormalisedToUppercase(String currency) {
-    var request = new PaymentRequest("12345678901234", 4, 2099, currency, 100L, "123");
+    var request = new PaymentRequest("12345678901234", 4, 2036, currency, 100L, "123");
     assertEquals(currency.toUpperCase(), request.currency());
   }
 
   @Test
   void whenCurrencyHasLeadingOrTrailingWhitespace_thenItIsTrimmed() {
-    var request = new PaymentRequest("12345678901234", 4, 2099, "  GBP  ", 100L, "123");
+    var request = new PaymentRequest("12345678901234", 4, 2036, "  GBP  ", 100L, "123");
     assertEquals("GBP", request.currency());
   }
 
   @Test
   void whenCurrencyIsNull_thenItRemainsNull() {
-    assertDoesNotThrow(() -> new PaymentRequest("12345678901234", 4, 2099, null, 100L, "123"));
+    assertDoesNotThrow(() -> new PaymentRequest("12345678901234", 4, 2036, null, 100L, "123"));
   }
 
   // expiryDate normalisation #############

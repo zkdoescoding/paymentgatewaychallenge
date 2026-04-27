@@ -33,7 +33,7 @@ class PaymentGatewayControllerTest {
 
   // Fails teh Luhn check so we use for validation rejection tests.
   public static final String INVALID_LUHN_CARD_NUMBER =
-      "2222405343248112";
+      "2222405343248158";
 
   @Mock private PaymentGatewayService paymentGatewayService;
   @Mock private ApiPaymentMapper apiPaymentMapper;
@@ -50,9 +50,9 @@ class PaymentGatewayControllerTest {
   @Test
   void whenProcessPaymentSucceeds_thenReturns200WithAuthorizedResponse() {
     UUID id = UUID.randomUUID();
-    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2099, "GBP", 100L, "123");
-    Payment payment = new Payment(id, PaymentStatus.AUTHORIZED, "8877", 4, 2099, "GBP", 100);
-    PaymentResponse response = new PaymentResponse(id, PaymentStatus.AUTHORIZED, "8877", 4, 2099, "GBP", 100);
+    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2036, "GBP", 100L, "123");
+    Payment payment = new Payment(id, PaymentStatus.AUTHORIZED, "8877", 4, 2036, "GBP", 100);
+    PaymentResponse response = new PaymentResponse(id, PaymentStatus.AUTHORIZED, "8877", 4, 2036, "GBP", 100);
 
     when(paymentGatewayService.processPayment(request)).thenReturn(payment);
     when(apiPaymentMapper.toResponse(payment)).thenReturn(response);
@@ -66,9 +66,9 @@ class PaymentGatewayControllerTest {
   @Test
   void whenProcessPaymentIsDeclined_thenReturns200WithDeclinedResponse() {
     UUID id = UUID.randomUUID();
-    PaymentRequest request = new PaymentRequest(INVALID_LUHN_CARD_NUMBER, 4, 2099, "GBP", 100L, "123");
-    Payment payment = new Payment(id, PaymentStatus.DECLINED, "8112", 4, 2099, "GBP", 100);
-    PaymentResponse response = new PaymentResponse(id, PaymentStatus.DECLINED, "8112", 4, 2099, "GBP", 100);
+    PaymentRequest request = new PaymentRequest(INVALID_LUHN_CARD_NUMBER, 4, 2036, "GBP", 100L, "123");
+    Payment payment = new Payment(id, PaymentStatus.DECLINED, "8112", 4, 2036, "GBP", 100);
+    PaymentResponse response = new PaymentResponse(id, PaymentStatus.DECLINED, "8112", 4, 2036, "GBP", 100);
 
     when(paymentGatewayService.processPayment(request)).thenReturn(payment);
     when(apiPaymentMapper.toResponse(payment)).thenReturn(response);
@@ -81,8 +81,8 @@ class PaymentGatewayControllerTest {
 
   @Test
   void whenProcessPaymentIsCalled_thenServiceCalledOnce() {
-    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2099, "GBP", 100L, "123");
-    Payment payment = new Payment(UUID.randomUUID(), PaymentStatus.AUTHORIZED, "8877", 4, 2099, "GBP", 100);
+    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2036, "GBP", 100L, "123");
+    Payment payment = new Payment(UUID.randomUUID(), PaymentStatus.AUTHORIZED, "8877", 4, 2036, "GBP", 100);
     when(paymentGatewayService.processPayment(request)).thenReturn(payment);
     when(apiPaymentMapper.toResponse(payment)).thenReturn(mock(PaymentResponse.class));
 
@@ -103,7 +103,7 @@ class PaymentGatewayControllerTest {
 
   @Test
   void whenBankIsUnavailable_thenBankUnavailableExceptionPropagates() {
-    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2099, "GBP", 100L, "123");
+    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2036, "GBP", 100L, "123");
     when(paymentGatewayService.processPayment(request))
         .thenThrow(new BankUnavailableException("Bank down", new RuntimeException()));
 
@@ -113,7 +113,7 @@ class PaymentGatewayControllerTest {
 
   @Test
   void whenBankReturnsError_thenBankExceptionPropagates() {
-    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2099, "GBP", 100L, "123");
+    PaymentRequest request = new PaymentRequest(VALID_CARD_NUMBER, 4, 2036, "GBP", 100L, "123");
     when(paymentGatewayService.processPayment(request))
         .thenThrow(new BankException("Bad bank response"));
 

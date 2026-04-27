@@ -10,7 +10,7 @@ class AmountValidatorTest {
   private final AmountValidator validator = new AmountValidator();
 
   private PaymentRequest requestWith(Long amount) {
-    return new PaymentRequest("12345678901234", 12, 2099, "USD", amount, "123");
+    return new PaymentRequest("12345678901234", 12, 2036, "USD", amount, "123");
   }
 
   @Test

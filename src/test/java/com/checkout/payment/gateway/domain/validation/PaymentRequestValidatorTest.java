@@ -21,7 +21,7 @@ class PaymentRequestValidatorTest {
   void whenPaymentRequestValid_thenNoExceptionsAreThrown() {
     PaymentRequestFieldValidator passing = r -> ValidationResult.valid();
     var validator = new PaymentRequestValidator(List.of(passing, passing));
-    var request = new PaymentRequest("12345678901234", 12, 2099, "USD", 100L, "123");
+    var request = new PaymentRequest("12345678901234", 12, 2036, "USD", 100L, "123");
     assertDoesNotThrow(() -> validator.validate(request));
   }
 
@@ -29,7 +29,7 @@ class PaymentRequestValidatorTest {
   void whenOneFieldInvalid_thenExceptionContainsOnlyThatError() {
     PaymentRequestFieldValidator failing = r -> ValidationResult.invalid("Card number is required.");
     var validator = new PaymentRequestValidator(List.of(failing));
-    var request = new PaymentRequest(null, 12, 2099, "USD", 100L, "123");
+    var request = new PaymentRequest(null, 12, 2036, "USD", 100L, "123");
 
     var ex = assertThrows(PaymentValidationException.class, () -> validator.validate(request));
     assertEquals(1, ex.getValidationErrors().size());
@@ -42,7 +42,7 @@ class PaymentRequestValidatorTest {
     PaymentRequestFieldValidator fail2 = r -> ValidationResult.invalid("Error 2");
     PaymentRequestFieldValidator pass  = r -> ValidationResult.valid();
     var validator = new PaymentRequestValidator(List.of(fail1, pass, fail2));
-    var request = new PaymentRequest("12345678901234", 12, 2099, "USD", 100L, "123");
+    var request = new PaymentRequest("12345678901234", 12, 2036, "USD", 100L, "123");
 
     var ex = assertThrows(PaymentValidationException.class, () -> validator.validate(request));
     assertEquals(2, ex.getValidationErrors().size());

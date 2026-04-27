@@ -40,7 +40,7 @@ class PaymentGatewayControllerIntegrationTest {
       {
         "card_number": "2222405343248877",
         "expiry_month": 4,
-        "expiry_year": 2099,
+        "expiry_year": 2036,
         "currency": "GBP",
         "amount": 100,
         "cvv": "123"
@@ -74,7 +74,7 @@ class PaymentGatewayControllerIntegrationTest {
         .andExpect(jsonPath("$.status").value("Authorized"))
         .andExpect(jsonPath("$.card_number_last_four").value("8877"))
         .andExpect(jsonPath("$.expiry_month").value(4))
-        .andExpect(jsonPath("$.expiry_year").value(2099))
+        .andExpect(jsonPath("$.expiry_year").value(2036))
         .andExpect(jsonPath("$.currency").value("GBP"))
         .andExpect(jsonPath("$.amount").value(100));
   }
@@ -97,7 +97,7 @@ class PaymentGatewayControllerIntegrationTest {
         {
           "card_number": "123",
           "expiry_month": 4,
-          "expiry_year": 2099,
+          "expiry_year": 2036,
           "currency": "GBP",
           "amount": 100,
           "cvv": "123"

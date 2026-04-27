@@ -25,10 +25,10 @@ class DefaultBankPaymentMapperTest {
 
   @Test
   void whenExpiryMonthIsSingleDigit_thenItIsPaddedWithLeadingZero() {
-    PaymentRequest request = new PaymentRequest("12345678901234", 1, 2099, "USD", 1L, "999");
+    PaymentRequest request = new PaymentRequest("12345678901234", 1, 2036, "USD", 1L, "999");
 
     BankPaymentRequest bankRequest = mapper.toRequest(request);
 
-    assertEquals("01/2099", bankRequest.expiryDate());
+    assertEquals("01/2036", bankRequest.expiryDate());
   }
 }

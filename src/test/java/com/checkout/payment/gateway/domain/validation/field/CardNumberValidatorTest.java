@@ -13,7 +13,7 @@ class CardNumberValidatorTest {
   private final CardNumberValidator validator = new CardNumberValidator();
 
   private PaymentRequest requestWith(String cardNumber) {
-    return new PaymentRequest(cardNumber, 12, 2099, "USD", 100L, "123");
+    return new PaymentRequest(cardNumber, 12, 2036, "USD", 100L, "123");
   }
 
   @Test
@@ -72,7 +72,7 @@ class CardNumberValidatorTest {
   @Test
   void whenCardNumberPassesLuhnCheck_thenValidationResultIsValid() {
     // Luhn sum = 60
-    PaymentRequest request = new PaymentRequest("2222405343248117", 4, 2099, "GBP", 100L, "123");
+    PaymentRequest request = new PaymentRequest("2222405343248117", 4, 2036, "GBP", 100L, "123");
 
     ValidationResult result = validator.validateField(request);
 
@@ -82,7 +82,7 @@ class CardNumberValidatorTest {
   @Test
   void whenCardNumberFailsLuhnCheck_thenValidationResultIsInvalid() {
     // Luhn sum = 55
-    PaymentRequest request = new PaymentRequest("2222405343248112", 4, 2099, "GBP", 100L, "123");
+    PaymentRequest request = new PaymentRequest("2222405343248112", 4, 2036, "GBP", 100L, "123");
 
     ValidationResult result = validator.validateField(request);
 

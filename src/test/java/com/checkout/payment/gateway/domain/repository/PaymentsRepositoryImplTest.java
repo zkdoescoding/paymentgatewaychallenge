@@ -22,7 +22,7 @@ class PaymentsRepositoryImplTest {
   @Test
   void whenPaymentIsAdded_thenItCanBeRetrievedById() {
     UUID id = UUID.randomUUID();
-    Payment payment = new Payment(id, PaymentStatus.AUTHORIZED, "8877", 12, 2099, "USD", 100);
+    Payment payment = new Payment(id, PaymentStatus.AUTHORIZED, "8877", 12, 2036, "USD", 100);
 
     repository.add(payment);
 
@@ -39,8 +39,8 @@ class PaymentsRepositoryImplTest {
 
   @Test
   void whenMultiplePaymentsAreAdded_thenEachIsRetrievable() {
-    Payment p1 = new Payment(UUID.randomUUID(), PaymentStatus.AUTHORIZED, "0001", 1, 2099, "GBP", 10);
-    Payment p2 = new Payment(UUID.randomUUID(), PaymentStatus.DECLINED, "0002", 2, 2099, "EUR", 20);
+    Payment p1 = new Payment(UUID.randomUUID(), PaymentStatus.AUTHORIZED, "0001", 1, 2036, "GBP", 10);
+    Payment p2 = new Payment(UUID.randomUUID(), PaymentStatus.DECLINED, "0002", 2, 2036, "EUR", 20);
 
     repository.add(p1);
     repository.add(p2);
