@@ -53,7 +53,7 @@ public class PaymentGatewayService {
       paymentRequestValidator.validate(request);
       authorizedStatus = acquiringBank.processPayment(request);
     } catch (PaymentValidationException | BankException e) {
-      LOG.warn("Payment request rejected. paymentId={} lastFour={} reason={}",
+      LOG.warn("Payment request failed. paymentId={} lastFour={} reason={}",
           paymentId, lastFour, e.getMessage());
       throw e;
     } catch (Exception e) {
